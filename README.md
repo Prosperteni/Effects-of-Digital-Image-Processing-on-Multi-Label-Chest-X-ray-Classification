@@ -14,9 +14,12 @@ We present a **systematic, controlled evaluation** of 15 preprocessing configura
 ---
 
 ## Experimental Pipeline
-![Pipeline](Pipeline.png)
+<p align="center">
+  <img src="Pipeline.png" alt="Pipeline" width="800"/>
+  <br>
+  <em>Fig 1. Overview of the experimental framework used in this study. The NIH ChestXray14 dataset was first partitioned using patient-wise splitting and standardized preprocessing. Baseline DL models were trained without DIP techniques, followed by controlled DIP-based experiments across multiple filter configurations. Final evaluation included per-class analysis, architecture comparison, and preprocessing sensitivity assessment.</em>
+</p>
 
-*Fig 1. Overview of the experimental framework used in this study. The NIH ChestXray14 dataset was first partitioned using patient-wise splitting and standardized preprocessing. Baseline DL models were trained without DIP techniques, followed by controlled DIP-based experiments across multiple filter configurations. Final evaluation included per-class analysis, architecture comparison, and preprocessing sensitivity assessment.
 
 ---
 
