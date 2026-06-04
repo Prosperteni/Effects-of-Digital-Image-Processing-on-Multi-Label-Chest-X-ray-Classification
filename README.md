@@ -13,6 +13,12 @@ We present a **systematic, controlled evaluation** of 15 preprocessing configura
 
 ---
 
+## Experimental Pipeline
+![Pipeline](Pipeline.png)
+*Fig 1. Overview of the experimental framework used in this study. The NIH ChestXray14 dataset was first partitioned using patient-wise splitting and standardized preprocessing. Baseline DL models were trained without DIP techniques, followed by controlled DIP-based experiments across multiple filter configurations. Final evaluation included per-class analysis, architecture comparison, and preprocessing sensitivity assessment.
+
+---
+
 ## 🔬 Key Findings
 
 - **CNN-based models** (ResNet-50, DenseNet-121) frequently achieved optimal performance under **baseline conditions** — excessive preprocessing degraded performance by disrupting local texture features.
