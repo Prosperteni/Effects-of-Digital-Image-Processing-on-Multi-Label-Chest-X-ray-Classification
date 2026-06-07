@@ -1,5 +1,4 @@
-# Official implementation of the study:
-# "Model-Dependent and Class-Specific Effects of Digital Image Processing on Multi-Label Chest X-ray Classification"
+# Official implementation of the study: "Model-Dependent and Class-Specific Effects of Digital Image Processing on Multi-Label Chest X-ray Classification"
 
 > **Does image preprocessing actually help? It depends on your model.**
 > A controlled large-scale study of Digital Image Processing (DIP) techniques across CNN, Transformer, and Hybrid deep learning architectures on the NIH ChestX-ray14 dataset.
@@ -35,28 +34,70 @@ We present a **systematic, controlled evaluation** of 15 preprocessing configura
 
 ## Repository Structure
 
-```
+The repository is organized by architecture. Each model family contains:
+
+* Baseline training and evaluation scripts
+* DIP-based ablation experiments
+* Test result summaries
+* Architecture-specific preprocessing sensitivity analyses
+
+```text
 .
-├── dataset/
-│   ├── Data_Entry_2017.csv          # NIH ChestXray14 labels
-│   ├── train_val_list_NIH.txt       # Patient-wise train/val split
-│   └── images-224/                  # Pre-resized CXR images (224×224)
+├── ConvFormer_Main/
+│   ├── ConvFormer/
+│   │   ├── train.py
+│   │   └── test.py
+│   ├── ConvFormer DIP/
+│   │   ├── ablation_study.py
+│   │   ├── test_ablation_models.py
+│   │   └── test_results/
+│   ├── ConvFormer_Heatmap.png
+│   └── Heatmap.py
 │
-├── models/
-│   └── best_*.pth                   # Saved model checkpoints per config
+├── DenseNet_Main/
+│   ├── DenseNet/
+│   ├── DenseNet DIP/
+│   ├── DenseNet_Heatmap.png
+│   └── Heatmap.py
 │
-├── results/
-│   ├── result_*.json                # Per-experiment AUC results
-│   └── *_ablation_summary.csv       # Summary tables per architecture
+├── ResNet50_Main/
+│   ├── ResNet50/
+│   ├── ResNet50_DIP/
+│   ├── ResNet50_Heatmap.png
+│   └── Heatmap.py
 │
-├── densenet_ablation.py             # DenseNet-121 ablation experiments
-├── resnet_ablation.py               # ResNet-50 ablation experiments
-├── vit_ablation.py                  # ViT-B16 ablation experiments
-├── swin_ablation.py                 # Swin-Tiny ablation experiments
-├── convformer_ablation.py           # ConvFormer ablation experiments
-├── filters.py                       # DIP filter implementations
+├── ResNet101_Main/
+│   ├── ResNet101/
+│   ├── ResNet101 DIP/
+│   ├── ResNet101_Heatmap.png
+│   └── Heatmap.py
+│
+├── ViT_b16_Main/
+│   ├── ViT_b16/
+│   ├── ViT_b16 DIP/
+│   ├── ViT-b16_Heatmap.png
+│   └── Heatmap.py
+│
+├── swin_t_Main/
+│   ├── swin_t/
+│   ├── swin_t DIP/
+│   ├── Swin-T_Heatmap.png
+│   └── Heatmap.py
+│
+├── filter_examples/
+│   ├── baseline.png
+│   ├── clahe_*.png
+│   ├── gaussian_*.png
+│   ├── bilateral_*.png
+│   └── hist_eq.png
+│
+├── gather_results.py
+├── requirements.txt
 └── README.md
 ```
+
+Heatmaps and filter examples are included to facilitate interpretation of preprocessing effects across architectures and pathologies.
+
 
 ---
 
@@ -90,62 +131,105 @@ All models use **ImageNet pre-trained weights** with a multi-label sigmoid outpu
 
 ## Dataset
 
-**NIH ChestX-ray14** — Wang et al., 2017
+This repository does **not** distribute the NIH ChestX-ray14 dataset.
 
-| Property | Value |
-|----------|-------|
-| Images | 112,120 frontal-view CXRs |
-| Patients | 30,805 |
-| Labels | 14 thoracic pathologies (multi-label) |
-| Split | Patient-wise (no patient leakage) |
+The dataset can be obtained from:
 
-**Pathologies:** Atelectasis, Cardiomegaly, Effusion, Infiltration, Mass, Nodule, Pneumonia, Pneumothorax, Consolidation, Edema, Emphysema, Fibrosis, Pleural Thickening, Hernia
+* NIH ChestX-ray14
+* Kaggle resized version used in this study
 
-> Dataset available at: [Kaggle](https://www.kaggle.com/datasets/khanfashee/nih-chest-x-ray-14-224x224-resized)
+The experiments expect the following files:
 
-Users should download the NIH ChestXray14 dataset and place it in the following structure:
-
-Expected structure:
-
-data/
+```text
+dataset/
 ├── Data_Entry_2017.csv
-└── images/
+├── train_val_list_NIH.txt
+└── images-224/
     ├── 00000001_000.png
     ├── 00000002_000.png
     └── ...
+```
+
+Before running any experiment, update the dataset paths in the corresponding training and testing scripts if your local directory structure differs.
+
+Dataset statistics:
+
+| Property | Value                      |
+| -------- | -------------------------- |
+| Images   | 112,120                    |
+| Patients | 30,805                     |
+| Labels   | 14 thoracic diseases       |
+| Task     | Multi-label classification |
+| Split    | Patient-wise               |
+
+Pathologies include Atelectasis, Cardiomegaly, Effusion, Infiltration, Mass, Nodule, Pneumonia, Pneumothorax, Consolidation, Edema, Emphysema, Fibrosis, Pleural Thickening, and Hernia.
 
 ---
 
 ## Getting Started
 
-### Prerequisites
+### Installation
+
+Create a Python environment and install dependencies:
 
 ```bash
-pip install torch torchvision opencv-python scikit-learn pandas numpy pillow tqdm
+pip install -r requirements.txt
 ```
 
-### Run an ablation study
+### Running Baseline Experiments
+
+Examples:
 
 ```bash
-# DenseNet-121 across all 15 configs
-python densenet_ablation.py
+# DenseNet-121 baseline
+python DenseNet_Main/DenseNet/train.py
 
-# ResNet-50
-python resnet_ablation.py
+# ResNet-50 baseline
+python ResNet50_Main/ResNet50/train.py
+
+# ViT-B16 baseline
+python ViT_b16_Main/ViT_b16/train.py
+
+# Swin-Tiny baseline
+python swin_t_Main/swin_t/train.py
+
+# ConvFormer baseline
+python ConvFormer_Main/ConvFormer/train.py
 ```
 
-Results are saved to `results/` as `.json` per experiment and a summary `.csv`.
+### Running DIP Ablation Studies
 
-### Filter implementations
+Examples:
 
-All DIP filters are implemented in `filters.py` and applied **before** the torchvision transform pipeline on PIL images:
+```bash
+# DenseNet-121 DIP study
+python DenseNet_Main/DenseNet DIP/train_densenet_ablation.py
 
-```python
-from filters import apply_filter
+# ResNet-50 DIP study
+python ResNet50_Main/ResNet50_DIP/train_resnet50_ablation.py
 
-# Example: CLAHE with clip limit 2.0
-image = apply_filter(image, filter_type='clahe', params={'clip_limit': 2.0, 'tile_grid': 8})
+# ViT-B16 DIP study
+python ViT_b16_Main/ViT_b16 DIP/train_vit_ablation.py
+
+# Swin-Tiny DIP study
+python swin_t_Main/swin_t DIP/train_swin_ablation.py
+
+# ConvFormer DIP study
+python ConvFormer_Main/ConvFormer DIP/ablation_study.py
 ```
+
+### Included Results
+
+To reduce repository size, trained model checkpoints are not distributed.
+
+The repository includes:
+
+* Architecture-specific preprocessing sensitivity heatmaps
+* Representative filter outputs
+* Summary result tables
+* Aggregated evaluation results used for analysis in the paper
+
+These files are sufficient to reproduce the reported trends and visualize preprocessing effects across architectures.
 
 ---
 
