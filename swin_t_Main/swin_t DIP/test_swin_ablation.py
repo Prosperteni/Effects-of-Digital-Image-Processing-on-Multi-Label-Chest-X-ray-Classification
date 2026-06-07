@@ -1,5 +1,5 @@
 """
-Swin Transformer Ablation Study - Testing on Official NIH Test Set
+Swin Transformer DIP Study - Testing on Official NIH Test Set
 COMPLETE - All 15 filter configurations
 """
 
@@ -205,7 +205,7 @@ MODELS_TO_TEST = [
 
 if __name__ == '__main__':
     print("="*60)
-    print("SWIN TRANSFORMER ABLATION STUDY - COMPLETE TEST SET EVALUATION")
+    print("SWIN TRANSFORMER DIP STUDY - COMPLETE TEST SET EVALUATION")
     print(f"Total models to test: {len(MODELS_TO_TEST)}")
     print("="*60)
     
@@ -248,6 +248,6 @@ if __name__ == '__main__':
     comparison_df.to_csv('test_results/swin_test_comparison.csv', index=False)
     
     print("\n" + "="*60)
-    print("FINAL RESULTS - SWIN TRANSFORMER ABLATION (ALL 15 CONFIGURATIONS)")
+    print("FINAL RESULTS - SWIN TRANSFORMER DIP (ALL 15 CONFIGURATIONS)")
     print("="*60)
     print(comparison_df.to_string(index=False))

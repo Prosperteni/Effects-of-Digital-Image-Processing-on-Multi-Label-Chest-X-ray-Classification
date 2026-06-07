@@ -1,5 +1,5 @@
 """
-ViT-Base-16 Ablation Study - Testing on Official NIH Test Set
+ViT-Base-16 DIP Study - Testing on Official NIH Test Set
 Tests all 15 trained models on 25,596 test images
 """
 
@@ -203,7 +203,7 @@ MODELS_TO_TEST = [
 # ==================== MAIN ====================
 if __name__ == '__main__':
     print("="*60)
-    print("VIT-BASE-16 ABLATION STUDY - TEST SET EVALUATION")
+    print("VIT-BASE-16 DIP STUDY - TEST SET EVALUATION")
     print("="*60)
     
     # Load test data
@@ -253,6 +253,6 @@ if __name__ == '__main__':
     comparison_df.to_csv('test_results/vit_test_comparison.csv', index=False)
     
     print("\n" + "="*60)
-    print("FINAL RESULTS - VIT-BASE-16 ABLATION")
+    print("FINAL RESULTS - VIT-BASE-16 DIP")
     print("="*60)
     print(comparison_df.to_string(index=False))

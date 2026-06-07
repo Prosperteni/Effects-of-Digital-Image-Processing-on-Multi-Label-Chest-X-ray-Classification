@@ -1,5 +1,5 @@
 """
-ResNet-101 Ablation Study - Complete Filter Comparison
+ResNet-101 DIP Study - Complete Filter Comparison
 Same 15 filter configurations as other architectures
 """
 
@@ -46,8 +46,8 @@ PATHOLOGIES = [
     'Pleural_Thickening', 'Hernia'
 ]
 
-# ==================== ABLATION CONFIGURATIONS ====================
-ABLATION_CONFIGS = [
+# ==================== DIP CONFIGURATIONS ====================
+DIP_CONFIGS = [
     {'filter_type': 'none', 'params': {}, 'name': 'baseline'},
     {'filter_type': 'clahe', 'params': {'clip_limit': 1.0, 'tile_grid': 8}, 'name': 'clahe_clip1.0'},
     {'filter_type': 'clahe', 'params': {'clip_limit': 2.0, 'tile_grid': 8}, 'name': 'clahe_clip2.0'},
@@ -330,8 +330,8 @@ def run_experiment(config):
 # ==================== MAIN ====================
 if __name__ == '__main__':
     print("="*60)
-    print("RESNET-101 ABLATION STUDY")
-    print(f"Total experiments to run: {len(ABLATION_CONFIGS)}")
+    print("RESNET-101 DIP STUDY")
+    print(f"Total experiments to run: {len(DIP_CONFIGS)}")
     print("="*60)
     
     os.makedirs('models', exist_ok=True)
@@ -339,9 +339,9 @@ if __name__ == '__main__':
     
     all_results = []
     
-    for i, config in enumerate(ABLATION_CONFIGS):
+    for i, config in enumerate(DIP_CONFIGS):
         print(f"\n{'='*60}")
-        print(f"Running experiment {i+1}/{len(ABLATION_CONFIGS)}: {config['name']}")
+        print(f"Running experiment {i+1}/{len(DIP_CONFIGS)}: {config['name']}")
         print(f"{'='*60}")
         
         result = run_experiment(config)
@@ -355,10 +355,10 @@ if __name__ == '__main__':
     } for r in all_results])
     
     summary_df = summary_df.sort_values('best_val_auc', ascending=False)
-    summary_df.to_csv('results/resnet101_ablation_summary.csv', index=False)
+    summary_df.to_csv('results/resnet101_DIP_summary.csv', index=False)
     
     print("\n" + "="*60)
-    print("RESNET-101 ABLATION STUDY COMPLETE!")
+    print("RESNET-101 DIP STUDY COMPLETE!")
     print("="*60)
     print("\nResults Summary (sorted by AUC):")
     print(summary_df.to_string(index=False))

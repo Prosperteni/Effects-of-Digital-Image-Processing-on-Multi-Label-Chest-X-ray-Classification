@@ -1,5 +1,5 @@
 """
-ResNet-101 Ablation Study - Testing on Official NIH Test Set
+ResNet-101 DIP Study - Testing on Official NIH Test Set
 Tests all 15 trained models on 25,596 test images
 """
 
@@ -206,7 +206,7 @@ MODELS_TO_TEST = [
 # ==================== MAIN ====================
 if __name__ == '__main__':
     print("="*60)
-    print("RESNET-101 ABLATION STUDY - TEST SET EVALUATION")
+    print("RESNET-101 DIP STUDY - TEST SET EVALUATION")
     print("="*60)
     
     # Load test data
@@ -256,6 +256,6 @@ if __name__ == '__main__':
     comparison_df.to_csv('test_results/resnet101_test_comparison.csv', index=False)
     
     print("\n" + "="*60)
-    print("FINAL RESULTS - RESNET-101 ABLATION")
+    print("FINAL RESULTS - RESNET-101 DIP")
     print("="*60)
     print(comparison_df.to_string(index=False))

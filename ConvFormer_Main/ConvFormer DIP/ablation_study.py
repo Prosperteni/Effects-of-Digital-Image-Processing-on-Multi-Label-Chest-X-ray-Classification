@@ -1,5 +1,5 @@
 """
-ConvFormer Ablation Study - Testing Multiple Filter Parameters
+ConvFormer DIP Study - Testing Multiple Filter Parameters
 This script runs multiple experiments automatically and saves all results
 """
 
@@ -20,10 +20,10 @@ from tqdm import tqdm
 import warnings
 warnings.filterwarnings('ignore')
 
-# ==================== ABLATION STUDY CONFIGURATION ====================
+# ==================== DIP STUDY CONFIGURATION ====================
 
 # Define all filter parameters to test
-ABLATION_CONFIGS = [
+DIP_CONFIGS = [
     # Baseline (no filter)
     {'filter_type': 'none', 'params': {}, 'name': 'baseline'},
     
@@ -375,8 +375,8 @@ def run_experiment(config):
 # ==================== MAIN ====================
 if __name__ == '__main__':
     print("="*60)
-    print("CONVFORMER ABLATION STUDY")
-    print(f"Total experiments to run: {len(ABLATION_CONFIGS)}")
+    print("CONVFORMER DIP STUDY")
+    print(f"Total experiments to run: {len(DIP_CONFIGS)}")
     print("="*60)
     
     # Create directories
@@ -385,9 +385,9 @@ if __name__ == '__main__':
     
     all_results = []
     
-    for i, config in enumerate(ABLATION_CONFIGS):
+    for i, config in enumerate(DIP_CONFIGS):
         print(f"\n{'='*60}")
-        print(f"Running experiment {i+1}/{len(ABLATION_CONFIGS)}: {config['name']}")
+        print(f"Running experiment {i+1}/{len(DIP_CONFIGS)}: {config['name']}")
         print(f"{'='*60}")
         
         result = run_experiment(config)
@@ -402,10 +402,10 @@ if __name__ == '__main__':
     } for r in all_results])
     
     summary_df = summary_df.sort_values('best_val_auc', ascending=False)
-    summary_df.to_csv('results/ablation_summary.csv', index=False)
+    summary_df.to_csv('results/DIP_summary.csv', index=False)
     
     print("\n" + "="*60)
-    print("ABLATION STUDY COMPLETE!")
+    print("DIP STUDY COMPLETE!")
     print("="*60)
     print("\nResults Summary (sorted by AUC):")
     print(summary_df.to_string(index=False))

@@ -1,5 +1,5 @@
 """
-ResNet-50 Ablation Study - Testing on Official NIH Test Set
+ResNet-50 DIP Study - Testing on Official NIH Test Set
 COMPLETE - All 15 filter configurations
 """
 
@@ -207,7 +207,7 @@ MODELS_TO_TEST = [
 
 if __name__ == '__main__':
     print("="*60)
-    print("RESNET-50 ABLATION STUDY - COMPLETE TEST SET EVALUATION")
+    print("RESNET-50 DIP STUDY - COMPLETE TEST SET EVALUATION")
     print(f"Total models to test: {len(MODELS_TO_TEST)}")
     print("="*60)
     
@@ -250,6 +250,6 @@ if __name__ == '__main__':
     comparison_df.to_csv('test_results/resnet50_test_comparison.csv', index=False)
     
     print("\n" + "="*60)
-    print("FINAL RESULTS - RESNET-50 ABLATION (ALL 15 CONFIGURATIONS)")
+    print("FINAL RESULTS - RESNET-50 DIP (ALL 15 CONFIGURATIONS)")
     print("="*60)
     print(comparison_df.to_string(index=False))

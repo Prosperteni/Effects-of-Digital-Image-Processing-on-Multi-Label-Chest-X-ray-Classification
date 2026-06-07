@@ -1,5 +1,5 @@
 """
-DenseNet-121 Ablation Study - Testing on Official NIH Test Set
+DenseNet-121 DIP Study - Testing on Official NIH Test Set
 Tests all 15 trained models on 25,596 test images
 """
 
@@ -199,7 +199,7 @@ def evaluate_test(model, loader, criterion):
 
 
 # ==================== ALL MODELS TO TEST ====================
-# Based on the ablation study training results (sorted by AUC)
+# Based on the DIP study training results (sorted by AUC)
 MODELS_TO_TEST = [
     {'name': 'baseline', 'path': 'models/best_baseline.pth', 'filter_type': 'none', 'params': {}},
     {'name': 'clahe_clip2.0', 'path': 'models/best_clahe_clip2.0.pth', 'filter_type': 'clahe', 'params': {'clip_limit': 2.0}},
@@ -245,7 +245,7 @@ def plot_comparison_bar(results_df, baseline_auc, save_path='test_results/densen
     
     plt.ylabel('Mean Test AUC', fontsize=12)
     plt.xlabel('Experiment', fontsize=12)
-    plt.title('DenseNet-121 Ablation Study: Test AUC for Different Filters', fontsize=14)
+    plt.title('DenseNet-121 DIP Study: Test AUC for Different Filters', fontsize=14)
     plt.xticks(rotation=45, ha='right')
     plt.ylim(0.75, 0.85)
     plt.legend()
@@ -282,7 +282,7 @@ def plot_improvement_chart(results_df, baseline_auc, save_path='test_results/den
 # ==================== MAIN ====================
 if __name__ == '__main__':
     print("="*60)
-    print("DENSENET-121 ABLATION STUDY - TEST SET EVALUATION")
+    print("DENSENET-121 DIP STUDY - TEST SET EVALUATION")
     print("="*60)
     
     # Load test data
@@ -360,7 +360,7 @@ if __name__ == '__main__':
     # Print results
     print("\n[4/4] Final Results")
     print("="*80)
-    print("DENSENET-121 ABLATION STUDY - TEST SET RESULTS (25,596 images)")
+    print("DENSENET-121 DIP STUDY - TEST SET RESULTS (25,596 images)")
     print("="*80)
     print(comparison_df.to_string(index=False))
     
@@ -382,7 +382,7 @@ if __name__ == '__main__':
         plot_improvement_chart(comparison_df, baseline_auc)
     
     print("\n" + "="*60)
-    print("✅ DENSENET-121 ABLATION TESTING COMPLETE!")
+    print("✅ DENSENET-121 DIP TESTING COMPLETE!")
     print("="*60)
     print("\n📁 Output files:")
     print("   - test_results/densenet_test_comparison.csv")

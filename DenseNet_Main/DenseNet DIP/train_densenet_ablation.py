@@ -1,6 +1,6 @@
 """
-ResNet-50 DIP Study - Testing Multiple Filter Parameters
-Same filter configurations as ConvFormer and DenseNet for fair comparison
+DenseNet-121 DIP Study - Testing Multiple Filter Parameters
+Same filter configurations as ConvFormer for fair comparison
 """
 
 import os
@@ -32,7 +32,7 @@ CSV_PATH = os.path.join(BASE_DIR, "dataset", "Data_Entry_2017.csv")
 TRAIN_VAL_FILE = os.path.join(BASE_DIR, "dataset", "train_val_list_NIH.txt")
 TEST_FILE = os.path.join(BASE_DIR, "dataset", "test_list_NIH.txt")
 
-BATCH_SIZE = 256                    # ResNet-50 can use large batches
+BATCH_SIZE = 128                    # DenseNet can use larger batches
 EPOCHS = 100
 LEARNING_RATE = 1e-4
 IMG_SIZE = 224
@@ -189,11 +189,11 @@ class NIHChestXrayFilteredDataset(Dataset):
             image = self.transform(image)
         return image, torch.from_numpy(labels)
 
-# ==================== RESNET-50 MODEL ====================
-def create_resnet50_model(num_classes=14):
-    model = models.resnet50(pretrained=True)
-    num_features = model.fc.in_features
-    model.fc = nn.Sequential(
+# ==================== DENSENET MODEL ====================
+def create_densenet_model(num_classes=14):
+    model = models.densenet121(pretrained=True)
+    num_features = model.classifier.in_features
+    model.classifier = nn.Sequential(
         nn.Dropout(0.3),
         nn.Linear(num_features, num_classes)
     )
@@ -290,9 +290,8 @@ def run_experiment(config):
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=4, pin_memory=True)
     
     # Model
-    model = create_resnet50_model(num_classes=NUM_CLASSES)
+    model = create_densenet_model(num_classes=NUM_CLASSES)
     model = model.to(DEVICE)
-    print(f"Model parameters: {sum(p.numel() for p in model.parameters())/1e6:.2f}M")
     
     # Training components
     criterion = nn.BCEWithLogitsLoss()
@@ -345,7 +344,7 @@ def run_experiment(config):
 # ==================== MAIN ====================
 if __name__ == '__main__':
     print("="*60)
-    print("RESNET-50 DIP STUDY")
+    print("DENSENET-121 DIP STUDY")
     print(f"Total experiments to run: {len(DIP_CONFIGS)}")
     print("="*60)
     
@@ -371,10 +370,10 @@ if __name__ == '__main__':
     } for r in all_results])
     
     summary_df = summary_df.sort_values('best_val_auc', ascending=False)
-    summary_df.to_csv('results/resnet50_DIP_summary.csv', index=False)
+    summary_df.to_csv('results/densenet_DIP_summary.csv', index=False)
     
     print("\n" + "="*60)
-    print("RESNET-50 DIP STUDY COMPLETE!")
+    print("DENSENET-121 DIP STUDY COMPLETE!")
     print("="*60)
     print("\nResults Summary (sorted by AUC):")
     print(summary_df.to_string(index=False))

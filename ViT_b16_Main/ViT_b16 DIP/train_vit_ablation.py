@@ -1,5 +1,5 @@
 """
-ViT-Base-16 Ablation Study - Testing Multiple Filter Parameters
+ViT-Base-16 DIP Study - Testing Multiple Filter Parameters
 Same filter configurations as ConvFormer, Swin, DenseNet, ResNet
 """
 
@@ -48,8 +48,8 @@ PATHOLOGIES = [
     'Pleural_Thickening', 'Hernia'
 ]
 
-# ==================== ABLATION CONFIGURATIONS ====================
-ABLATION_CONFIGS = [
+# ==================== DIP CONFIGURATIONS ====================
+DIP_CONFIGS = [
     # Baseline (no filter)
     {'filter_type': 'none', 'params': {}, 'name': 'baseline'},
     
@@ -344,8 +344,8 @@ def run_experiment(config):
 # ==================== MAIN ====================
 if __name__ == '__main__':
     print("="*60)
-    print("VIT-BASE-16 ABLATION STUDY")
-    print(f"Total experiments to run: {len(ABLATION_CONFIGS)}")
+    print("VIT-BASE-16 DIP STUDY")
+    print(f"Total experiments to run: {len(DIP_CONFIGS)}")
     print("="*60)
     
     os.makedirs('models', exist_ok=True)
@@ -353,9 +353,9 @@ if __name__ == '__main__':
     
     all_results = []
     
-    for i, config in enumerate(ABLATION_CONFIGS):
+    for i, config in enumerate(DIP_CONFIGS):
         print(f"\n{'='*60}")
-        print(f"Running experiment {i+1}/{len(ABLATION_CONFIGS)}: {config['name']}")
+        print(f"Running experiment {i+1}/{len(DIP_CONFIGS)}: {config['name']}")
         print(f"{'='*60}")
         
         result = run_experiment(config)
@@ -370,10 +370,10 @@ if __name__ == '__main__':
     } for r in all_results])
     
     summary_df = summary_df.sort_values('best_val_auc', ascending=False)
-    summary_df.to_csv('results/vit_ablation_summary.csv', index=False)
+    summary_df.to_csv('results/vit_DIP_summary.csv', index=False)
     
     print("\n" + "="*60)
-    print("VIT-BASE-16 ABLATION STUDY COMPLETE!")
+    print("VIT-BASE-16 DIP STUDY COMPLETE!")
     print("="*60)
     print("\nResults Summary (sorted by AUC):")
     print(summary_df.to_string(index=False))

@@ -1,5 +1,5 @@
 """
-Complete Ablation Study Testing - Test all models on official NIH test set
+Complete DIP Study Testing - Test all models on official NIH test set
 Auto-creates test split if test_list_NIH.txt not found
 """
 
@@ -223,7 +223,7 @@ MODELS_TO_TEST = [
 # ==================== MAIN ====================
 if __name__ == '__main__':
     print("="*60)
-    print("COMPLETE ABLATION STUDY: TESTING ALL 15 FILTER CONFIGURATIONS")
+    print("COMPLETE DIP STUDY: TESTING ALL 15 FILTER CONFIGURATIONS")
     print("="*60)
     
     # Load test data - AUTO CREATE IF NOT EXISTS
@@ -299,11 +299,11 @@ if __name__ == '__main__':
     print("\n[3/4] Saving results...")
     comparison_df = pd.DataFrame(all_test_results)
     comparison_df = comparison_df.sort_values('mean_test_auc', ascending=False)
-    comparison_df.to_csv('test_results/ablation_test_comparison.csv', index=False)
+    comparison_df.to_csv('test_results/DIP_test_comparison.csv', index=False)
     
     print("\n[4/4] Final Results")
     print("="*80)
-    print("COMPLETE ABLATION STUDY - TEST SET RESULTS (15 CONFIGURATIONS)")
+    print("COMPLETE DIP STUDY - TEST SET RESULTS (15 CONFIGURATIONS)")
     print("="*80)
     print(comparison_df.to_string(index=False))
     
@@ -321,4 +321,4 @@ if __name__ == '__main__':
                 print(f"    {row['name']:20s}: {row['mean_test_auc']:.4f} ({sign}{imp:.2f}%)")
     
     print("\n✅ Testing complete!")
-    print("📁 Results saved to: test_results/ablation_test_comparison.csv")
+    print("📁 Results saved to: test_results/DIP_test_comparison.csv")

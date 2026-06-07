@@ -1,5 +1,5 @@
 """
-Combine all ablation test results into a single JSON file
+Combine all DIP test results into a single JSON file
 Reads test_results/results_*.csv files and creates combined_results.json
 """
 
@@ -38,7 +38,7 @@ def extract_config_from_filename(filename):
 # ==================== MAIN ====================
 def main():
     print("="*60)
-    print("COMBINING ABLATION TEST RESULTS INTO JSON")
+    print("COMBINING DIP TEST RESULTS INTO JSON")
     print("="*60)
     
     # Find all result CSV files
