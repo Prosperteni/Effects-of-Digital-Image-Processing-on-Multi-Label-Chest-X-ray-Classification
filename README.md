@@ -5,7 +5,7 @@
 
 ---
 
-## 📋 Overview
+## Overview
 
 Standard preprocessing is often treated as a neutral, fixed step in medical imaging pipelines. This work challenges that assumption.
 
@@ -23,7 +23,7 @@ We present a **systematic, controlled evaluation** of 15 preprocessing configura
 
 ---
 
-## 🔬 Key Findings
+## Findings
 
 - **CNN-based models** (ResNet-50, DenseNet-121) frequently achieved optimal performance under **baseline conditions** — excessive preprocessing degraded performance by disrupting local texture features.
 - **Transformer and hybrid models** (ViT-B16, Swin-Tiny, ConvFormer) **benefited from contrast enhancement** (CLAHE, Histogram Equalization), likely due to their reliance on global contextual relationships.
@@ -32,7 +32,7 @@ We present a **systematic, controlled evaluation** of 15 preprocessing configura
 
 ---
 
-## 🗂️ Repository Structure
+## Repository Structure
 
 ```
 .
@@ -73,7 +73,7 @@ All 15 configurations were evaluated under **identical training conditions** (sa
 
 ---
 
-## 🏗️ Architectures
+## Architectures
 
 | Model | Type | Backbone |
 |-------|------|----------|
@@ -87,7 +87,7 @@ All models use **ImageNet pre-trained weights** with a multi-label sigmoid outpu
 
 ---
 
-## 📊 Dataset
+## Dataset
 
 **NIH ChestX-ray14** — Wang et al., 2017
 
@@ -102,9 +102,18 @@ All models use **ImageNet pre-trained weights** with a multi-label sigmoid outpu
 
 > Dataset available at: [Kaggle](https://www.kaggle.com/datasets/khanfashee/nih-chest-x-ray-14-224x224-resized)
 
+Expected structure:
+
+data/
+├── Data_Entry_2017.csv
+└── images/
+    ├── 00000001_000.png
+    ├── 00000002_000.png
+    └── ...
+
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -137,7 +146,7 @@ image = apply_filter(image, filter_type='clahe', params={'clip_limit': 2.0, 'til
 
 ---
 
-## 🧪 Training Details
+## Training Details
 
 | Setting | Value |
 |---------|-------|
@@ -155,7 +164,7 @@ image = apply_filter(image, filter_type='clahe', params={'clip_limit': 2.0, 'til
 
 ---
 
-## 📈 Evaluation
+## Evaluation
 
 Performance is measured using **AUC-ROC** per pathology class and mean AUC across all 14 classes. Results are visualized as:
 
@@ -163,13 +172,13 @@ Performance is measured using **AUC-ROC** per pathology class and mean AUC acros
 - Per-disease × per-config heatmaps showing preprocessing sensitivity
 
 ---
-## 📄 License
+## License
 
 This project is licensed under the MIT License. See `LICENSE` for details.
 
 ---
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
 - NIH Clinical Center for the ChestX-ray14 dataset
 - PyTorch and torchvision teams
