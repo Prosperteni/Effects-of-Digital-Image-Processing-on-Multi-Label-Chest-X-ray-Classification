@@ -1,4 +1,5 @@
-# Model-Dependent and Class-Specific Effects of Digital Image Processing on Multi-Label Chest X-ray Classification
+# Official implementation of the study:
+# "Model-Dependent and Class-Specific Effects of Digital Image Processing on Multi-Label Chest X-ray Classification"
 
 > **Does image preprocessing actually help? It depends on your model.**
 > A controlled large-scale study of Digital Image Processing (DIP) techniques across CNN, Transformer, and Hybrid deep learning architectures on the NIH ChestX-ray14 dataset.
@@ -101,6 +102,8 @@ All models use **ImageNet pre-trained weights** with a multi-label sigmoid outpu
 **Pathologies:** Atelectasis, Cardiomegaly, Effusion, Infiltration, Mass, Nodule, Pneumonia, Pneumothorax, Consolidation, Edema, Emphysema, Fibrosis, Pleural Thickening, Hernia
 
 > Dataset available at: [Kaggle](https://www.kaggle.com/datasets/khanfashee/nih-chest-x-ray-14-224x224-resized)
+
+Users should download the NIH ChestXray14 dataset and place it in the following structure:
 
 Expected structure:
 
