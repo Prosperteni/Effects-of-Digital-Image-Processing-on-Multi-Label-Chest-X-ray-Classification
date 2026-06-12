@@ -1,0 +1,16 @@
+name,filter_type,mean_test_auc
+baseline,none,0.8081615647014139
+clahe_clip1.0,clahe,0.8045424551950148
+clahe_clip4.0,clahe,0.8044426493774228
+clahe_clip2.0,clahe,0.8027791187826095
+gaussian_k3,gaussian,0.8011735152239092
+clahe_clip3.0,clahe,0.7993920049104236
+gaussian_k9,gaussian,0.7986663985662229
+clahe_clip5.0,clahe,0.7984451807708757
+gaussian_k5,gaussian,0.7970866680293838
+gaussian_k7,gaussian,0.7963072824588088
+hist_eq,hist_eq,0.794150080272234
+bilateral_d5,bilateral,0.7930918599093915
+bilateral_d7,bilateral,0.7862947521516872
+bilateral_d11,bilateral,0.7838875367878391
+bilateral_d9,bilateral,0.7813093793147933

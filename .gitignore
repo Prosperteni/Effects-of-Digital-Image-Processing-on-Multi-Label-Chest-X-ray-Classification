@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model checkpoints
+*.pth
+*.pt
+
+# NumPy prediction files
+*.npy
+
+# Test results CSVs (optional)
+# test_results/*.csv
